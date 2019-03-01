@@ -1,4 +1,3 @@
-from slackclient import SlackClient
 from time import time
 from scipy.stats import chisquare
 import random
@@ -19,7 +18,6 @@ def main():
     fake_FNR_data = FNR(fake_FDR_data)
     write(fake_FNR_data, fake_outfile)
 
-    send_slack_alert()
 
 def GWAS():
     infile = open('Formatted_GWAS.txt', 'r')
@@ -163,17 +161,6 @@ def write(data, outfile):
 
 
 
-def send_slack_alert():
-    end = time()
-    duration = round(end-start)
-    slack_client = SlackClient('xoxp-178932313842-224252307990-519296419108-4a2b11575629537eeaf7fb56af3f1573')
-    slack_client.api_call(
-        "chat.postMessage",
-        channel='program_finished',
-        text='@alex, your program has finished! It took {} seconds.'.format(duration),
-        username='starterbot',
-        icon_emoji=':robot_face:'
-    )
 
 
 main()
